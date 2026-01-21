@@ -1,65 +1,125 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, Sparkles, Info } from 'lucide-react';
+import { ThemeToggle } from "@/components/theme-toggle";
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    const router = useRouter();
+
+    const goToLogin = () => {
+        router.push('/login');
+    };
+
+    return (
+        <main className="relative min-h-screen overflow-hidden">
+
+            {/* Gradient Mesh Background */}
+            <div
+                className="fixed inset-0 opacity-30"
+                style={{ background: 'var(--gradient-mesh)' }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
-}
+
+            {/* Fixed Theme Toggle - Top Right Corner */}
+            <div className="fixed top-3 right-3 md:top-4 md:right-4 z-50">
+                <ThemeToggle />
+            </div>
+
+            {/* Hero Section */}
+            <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ zIndex: 10 }}>
+                <div className="container mx-auto text-center">
+                    {/* Large Logo - FIRST (Boss feedback - MASSIVE 800x800!) */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                        className="flex justify-center"
+                        style={{ marginBottom: '50px', marginTop: '20px' }}
+                    >
+                        <div className="relative animate-float">
+                            <div className="absolute inset-0 blur-3xl opacity-50" style={{ background: 'var(--gradient-hero)' }} />
+                            <Image
+                                src="/bandhannova-logo-final.svg"
+                                alt="BandhanNova Logo"
+                                width={700}
+                                height={700}
+                                className="relative z-10"
+                                priority
+                            />
+                        </div>
+                    </motion.div>
+
+                    {/* Main Headline - MORE SPACE */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                        className="display"
+                        style={{ color: 'var(--foreground)', marginBottom: '30px', fontSize: 'clamp(2rem, 6vw, 4rem)' }}
+                    >
+                        Welcome to the
+                        <br />
+                        <span className="gradient-text">Leaders Community Hub</span>
+                    </motion.h1>
+
+                    {/* Subheadline - PERFECTLY HORIZONTAL CENTER (Boss feedback) */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.7 }}
+                        className="flex justify-center items-center w-full"
+                        style={{ marginBottom: '30px' }}
+                    >
+                        <p
+                            className="body-large max-w-5xl text-center px-8"
+                            style={{ color: 'var(--foreground-secondary)' }}
+                        >
+                            An exclusive communication hub designed for BandhanNova leaders and team members.
+                            Collaborate, strategize, and stay connected with your leadership community in real-time.
+                        </p>
+                    </motion.div>
+
+                    {/* CTA Buttons - WITH TOP SPACING */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.9 }}
+                        className="flex flex-col sm:flex-row gap-5 justify-center items-center"
+                        style={{ marginTop: '0px', marginBottom: '40px' }}
+                    >
+                        <Button
+                            onClick={goToLogin}
+                            size="lg"
+                            className="group relative px-14 py-5 rounded-2xl h-12 font-bold text-white overflow-hidden transition-all duration-300 hover:scale-105 min-w-[280px]"
+                            style={{ background: 'var(--gradient-hero)' }}
+                        >
+                            <span className="relative z-10 flex items-center gap-2 justify-center text-sm md:text-xl">
+                                Enter Leaders Hub
+                                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
+                        </Button>
+
+                        <Button
+                            onClick={() => window.open('https://www.bandhannova.in', '_blank')}
+                            variant="outline"
+                            size="lg"
+                            className="group px-14 py-5 rounded-2xl h-12 font-bold glass transition-all duration-300 hover:scale-105 hover:glass-strong min-w-[280px] flex items-center justify-center"
+                        >
+                            <span className="flex items-center gap-2 justify-center text-sm md:text-xl">
+                                Visit BandhanNova
+                                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                        </Button>
+                    </motion.div>
+                </div>
+            </section>
+        </main>
+    )
+};

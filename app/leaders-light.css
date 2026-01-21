@@ -1,0 +1,255 @@
+/* ============================================
+   LEADERS CHAT - LIGHT MODE STYLES
+   ============================================ */
+
+/* ============================================
+   SIDEBAR - LIGHT MODE
+   ============================================ */
+
+.light .leaders-sidebar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.light .leaders-sidebar-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar icons MUST be BLACK - except gradient buttons */
+.light .leaders-sidebar svg:not([data-keep-white]),
+.light .leaders-sidebar button:not([style*="gradient"]) svg,
+.light .leaders-sidebar .lucide:not([data-keep-white]),
+.light .leaders-sidebar button:not([style*="gradient"]) .lucide {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    fill: none !important;
+}
+
+/* Ensure gradient button icons stay WHITE */
+.light .leaders-sidebar button[style*="gradient"] svg,
+.light .leaders-sidebar button[style*="gradient"] .lucide {
+    color: white !important;
+    stroke: white !important;
+}
+
+/* Sidebar text must be DARK */
+.light .leaders-sidebar span,
+.light .leaders-sidebar p {
+    color: var(--foreground) !important;
+}
+
+/* Sidebar button styling - BLACK TRANSPARENT with VISIBLE BORDER */
+.light .leaders-sidebar button {
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: var(--foreground) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.light .leaders-sidebar button:hover {
+    background: rgba(0, 0, 0, 0.12) !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Active button with gradient - WHITE text */
+.light .leaders-sidebar button[style*="gradient"] {
+    background: var(--gradient-hero) !important;
+    color: white !important;
+}
+
+.light .leaders-sidebar button[style*="gradient"] svg,
+.light .leaders-sidebar button[style*="gradient"] span,
+.light .leaders-sidebar button[style*="gradient"] * {
+    color: white !important;
+    stroke: white !important;
+}
+
+/* Sign out button */
+.light .leaders-sidebar button.text-red-500,
+.light .leaders-sidebar button.text-red-500 svg,
+.light .leaders-sidebar button.text-red-500 span {
+    color: #dc2626 !important;
+}
+
+/* Glass elements in sidebar */
+.light .leaders-sidebar .glass {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* User List - Light Mode */
+.light .leaders-user-item {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.light .leaders-user-item:hover {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.light .leaders-user-status {
+    border-color: var(--bg-light-secondary);
+}
+
+/* ============================================
+   CHAT AREA - LIGHT MODE
+   ============================================ */
+
+.light .leaders-chat-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* Message Bubbles - Light Mode */
+.light .leaders-message-bubble {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.light .leaders-message.own .leaders-message-bubble {
+    background: linear-gradient(135deg, rgba(198, 131, 215, 0.15) 0%, rgba(34, 60, 207, 0.15) 100%);
+    border-color: rgba(198, 131, 215, 0.25);
+}
+
+/* Media Messages - Light Mode */
+.light .leaders-message-media {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light .leaders-message-file-info {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.light .leaders-message-download-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light .leaders-message-download-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   INPUT AREA - LIGHT MODE
+   ============================================ */
+
+.light .leaders-input-area {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.light .leaders-input {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light .leaders-input:focus {
+    border-color: var(--primary-purple);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light .leaders-action-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light .leaders-action-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   UPLOAD PROGRESS - LIGHT MODE
+   ============================================ */
+
+.light .leaders-upload-progress {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.light .leaders-upload-progress-bar {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   MEDIA VIEWER - LIGHT MODE
+   ============================================ */
+
+.light .leaders-media-viewer {
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.light .leaders-media-viewer-close {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: var(--text-light);
+}
+
+.light .leaders-media-viewer-close:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.light .leaders-media-viewer-download {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: var(--text-light);
+}
+
+.light .leaders-media-viewer-download:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* Send button - ensure visibility in light mode */
+.light .leaders-send-btn {
+    background: var(--gradient-hero) !important;
+    color: white !important;
+}
+
+.light .leaders-send-btn:hover {
+    background: var(--gradient-hero) !important;
+    opacity: 0.9;
+}
+
+.light .leaders-send-btn:disabled {
+    opacity: 0.5 !important;
+}
+
+/* ============================================
+   SCROLLBAR - LIGHT MODE
+   ============================================ */
+
+.light .leaders-messages-container::-webkit-scrollbar-thumb,
+.light .leaders-user-list::-webkit-scrollbar-thumb {
+    background: rgba(34, 60, 207, 0.3);
+}
+
+.light .leaders-messages-container::-webkit-scrollbar-thumb:hover,
+.light .leaders-user-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(34, 60, 207, 0.5);
+}
+
+/* ============================================
+   TOGGLE BUTTON - LIGHT MODE
+   ============================================ */
+
+.light .fixed.top-4.left-4.glass {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.light .fixed.top-4.left-4.glass svg {
+    color: #0F172A !important;
+    stroke: #0F172A !important;
+}
+
+/* ============================================
+   EMOJI PICKER - LIGHT MODE
+   ============================================ */
+
+.light .z-\[10000\] {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.light .z-\[10000\] button:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
+}

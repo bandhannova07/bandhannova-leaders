@@ -1,0 +1,44 @@
+/* Leaders Settings - Light Mode */
+
+.settings-input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--foreground);
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+}
+
+.settings-input:focus {
+    outline: none;
+    border-color: var(--primary-purple);
+    background: rgba(168, 85, 247, 0.08);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+.settings-input::placeholder {
+    color: var(--foreground-tertiary);
+}
+
+.settings-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Settings sections */
+.settings-section {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.settings-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--foreground);
+}

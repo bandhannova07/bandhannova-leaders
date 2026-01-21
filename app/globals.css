@@ -1,26 +1,1794 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* ============================================
+   DESIGN SYSTEM - CSS VARIABLES
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --primary-purple: #C683D7;
+  --primary-blue: #223CCF;
+  --accent-cyan: #00D9FF;
+  --accent-pink: #FF6B9D;
+
+  /* Light Mode Colors - New Professional Palette */
+  --bg-light: #F8FAFC;
+  --bg-light-secondary: #FFFFFF;
+  --bg-light-tertiary: #E5E7EB;
+  --text-light: #0F172A;
+  --text-light-secondary: #475569;
+  --text-light-tertiary: #94A3B8;
+
+  /* Dark Mode Colors */
+  --bg-dark: #0A0A0F;
+  --bg-dark-secondary: #1A1A24;
+  --bg-dark-tertiary: #252535;
+  --text-dark: #FFFFFF;
+  --text-dark-secondary: #A0A0B0;
+  --text-dark-tertiary: #707080;
+
+  /* Gradient Definitions */
+  --gradient-hero: linear-gradient(135deg, #C683D7 0%, #223CCF 50%, #00D9FF 100%);
+  --gradient-card: linear-gradient(135deg, rgba(198, 131, 215, 0.1) 0%, rgba(34, 60, 207, 0.05) 100%);
+  --gradient-accent: linear-gradient(90deg, #FF6B9D 0%, #C683D7 100%);
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(198, 131, 215, 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(34, 60, 207, 0.3) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(0, 217, 255, 0.2) 0px, transparent 50%);
+
+  /* Spacing Scale (4px base) */
+  --space-1: 0.25rem;
+  /* 4px */
+  --space-2: 0.5rem;
+  /* 8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-6: 1.5rem;
+  /* 24px */
+  --space-8: 2rem;
+  /* 32px */
+  --space-12: 3rem;
+  /* 48px */
+  --space-16: 4rem;
+  /* 64px */
+  --space-24: 6rem;
+  /* 96px */
+  --space-32: 8rem;
+  /* 128px */
+
+  /* Border Radius */
+  --radius-sm: 0.5rem;
+  /* 8px */
+  --radius-md: 1rem;
+  /* 16px */
+  --radius-lg: 1.5rem;
+  /* 24px */
+  --radius-xl: 2rem;
+  /* 32px */
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(198, 131, 215, 0.5), 0 0 40px rgba(34, 60, 207, 0.3);
+  --shadow-glow-strong: 0 0 30px rgba(198, 131, 215, 0.7), 0 0 60px rgba(34, 60, 207, 0.5);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+
+  /* Z-index Scale */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-tooltip: 600;
+
+  /* Default to Dark Mode (Boss feedback) */
+  --background: var(--bg-dark);
+  --background-secondary: var(--bg-dark-secondary);
+  --background-tertiary: var(--bg-dark-tertiary);
+  --foreground: var(--text-dark);
+  --foreground-secondary: var(--text-dark-secondary);
+  --foreground-tertiary: var(--text-dark-tertiary);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   THEME SWITCHING
+   ============================================ */
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+  --background: var(--bg-dark);
+  --background-secondary: var(--bg-dark-secondary);
+  --background-tertiary: var(--bg-dark-tertiary);
+  --foreground: var(--text-dark);
+  --foreground-secondary: var(--text-dark-secondary);
+  --foreground-tertiary: var(--text-dark-tertiary);
+
+  --card: var(--bg-dark-secondary);
+  --card-foreground: var(--text-dark);
+  --popover: var(--bg-dark-secondary);
+  --popover-foreground: var(--text-dark);
+  --primary: #C683D7;
+  --primary-foreground: #FFFFFF;
+  --muted: var(--bg-dark-tertiary);
+  --muted-foreground: var(--text-dark-secondary);
+  --accent: var(--bg-dark-tertiary);
+  --accent-foreground: var(--text-dark);
+  --border: var(--bg-dark-tertiary);
+  --input: var(--bg-dark-tertiary);
+  --ring: #C683D7;
+  --sidebar-btn-bg: rgba(255, 255, 255, 0.1);
 }
 
+/* Light Mode Theme */
+[data-theme="light"] {
+  --background: var(--bg-light);
+  --background-secondary: var(--bg-light-secondary);
+  --background-tertiary: var(--bg-light-tertiary);
+  --foreground: var(--text-light);
+  --foreground-secondary: var(--text-light-secondary);
+  --foreground-tertiary: var(--text-light-tertiary);
+
+  --card: var(--bg-light-secondary);
+  --card-foreground: var(--text-light);
+  --popover: var(--bg-light-secondary);
+  --popover-foreground: var(--text-light);
+  --primary: #223CCF;
+  --primary-foreground: #FFFFFF;
+  --muted: var(--bg-light-tertiary);
+  --muted-foreground: var(--text-light-secondary);
+  --accent: var(--bg-light-tertiary);
+  --accent-foreground: var(--text-light);
+  --border: var(--bg-light-tertiary);
+  --input: var(--bg-light-tertiary);
+  --ring: #223CCF;
+  --sidebar-btn-bg: rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth theme transition */
+* {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+/* Disable transition for specific elements */
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
+
+:root {
+  /* shadcn/ui CSS Variables */
+  --radius: 0.5rem;
+
+  /* Card */
+  --card: var(--bg-dark-secondary);
+  --card-foreground: var(--text-dark);
+
+  /* Popover */
+  --popover: var(--bg-dark-secondary);
+  --popover-foreground: var(--text-dark);
+
+  /* Primary */
+  --primary: #C683D7;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary */
+  --secondary: var(--bg-dark-tertiary);
+  --secondary-foreground: var(--text-dark);
+
+  /* Muted */
+  --muted: var(--bg-dark-tertiary);
+  --muted-foreground: var(--text-dark-secondary);
+
+  /* Accent */
+  --accent: var(--bg-dark-tertiary);
+  --accent-foreground: var(--text-dark);
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #FFFFFF;
+
+  /* Border */
+  --border: var(--bg-dark-tertiary);
+  --input: var(--bg-dark-tertiary);
+  --ring: #C683D7;
+}
+
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--bg-dark);
+    --background-secondary: var(--bg-dark-secondary);
+    --background-tertiary: var(--bg-dark-tertiary);
+    --foreground: var(--text-dark);
+    --foreground-secondary: var(--text-dark-secondary);
+    --foreground-tertiary: var(--text-dark-tertiary);
   }
+}
+
+/* Dark mode class override */
+.dark {
+  --background: var(--bg-dark);
+  --background-secondary: var(--bg-dark-secondary);
+  --background-tertiary: var(--bg-dark-tertiary);
+  --foreground: var(--text-dark);
+  --foreground-secondary: var(--text-dark-secondary);
+  --foreground-tertiary: var(--text-dark-tertiary);
+}
+
+/* Light mode class override */
+.light {
+  --background: var(--bg-light);
+  --background-secondary: var(--bg-light-secondary);
+  --background-tertiary: var(--bg-light-tertiary);
+  --foreground: var(--text-light);
+  --foreground-secondary: var(--text-light-secondary);
+  --foreground-tertiary: var(--text-light-tertiary);
+
+  /* shadcn/ui CSS Variables for Light Mode */
+  --card: var(--bg-light-secondary);
+  --card-foreground: var(--text-light);
+  --popover: var(--bg-light-secondary);
+  --popover-foreground: var(--text-light);
+  --primary: var(--primary-purple);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--bg-light-tertiary);
+  --secondary-foreground: var(--text-light);
+  --muted: var(--bg-light-tertiary);
+  --muted-foreground: var(--text-light-secondary);
+  --accent: var(--accent-cyan);
+  --accent-foreground: var(--text-light);
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: var(--bg-light-tertiary);
+  --input: var(--bg-light-tertiary);
+  --ring: var(--primary-purple);
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background var(--transition-base), color var(--transition-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.display {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.h2 {
+  font-size: clamp(1.25rem, 4vw, 1.875rem);
+  font-weight: 700;
+}
+
+.h3 {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-weight: 600;
+}
+
+.body-large {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.small {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism - Dark Mode */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Glassmorphism - Light Mode */
+.light .glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.light .glass-strong {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Glow Effects */
+.glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.6s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-purple);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue);
+}
+
+/* Custom smaller scrollbar for chat input */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(198, 131, 215, 0.5);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(198, 131, 215, 0.8);
+}
+
+/* Remove textarea resize handle */
+.custom-scrollbar {
+  resize: none !important;
+}
+
+/* Truncate input placeholders on small screens */
+@media (max-width: 400px) {
+
+  input::placeholder,
+  textarea::placeholder {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* Specific truncation for password fields to avoid overlay with show/hide button */
+  input[type="password"]::placeholder,
+  input[type="text"].password-field::placeholder {
+    max-width: calc(100% - 80px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background: var(--primary-purple);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--primary-purple);
+  color: white !important;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* ============================================
+   FOCUS STATES
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--primary-purple);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-purple);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE OPTIMIZATION FOR SMALL SMARTPHONES
+   ============================================ */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+
+  .display {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  .h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  .h3 {
+    font-size: clamp(1.125rem, 4vw, 1.5rem);
+  }
+
+  .body-large {
+    font-size: 1rem;
+  }
+
+  .body {
+    font-size: 0.875rem;
+  }
+
+  .small {
+    font-size: 0.75rem;
+  }
+
+  .container {
+    padding: 0 var(--space-3);
+  }
+
+  button,
+  .btn {
+    font-size: 0.875rem !important;
+    padding: 0.625rem 1rem !important;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 14px !important;
+    padding: 0.625rem 0.75rem !important;
+  }
+
+  .glass,
+  .glass-strong {
+    padding: 1rem !important;
+  }
+}
+
+@media (max-width: 374px) {
+  body {
+    font-size: 13px;
+  }
+
+  .display {
+    font-size: 1.5rem;
+  }
+
+  .h1 {
+    font-size: 1.375rem;
+  }
+
+  .h2 {
+    font-size: 1.125rem;
+  }
+
+  .h3 {
+    font-size: 1rem;
+  }
+
+  button,
+  .btn {
+    font-size: 0.8125rem !important;
+    padding: 0.5rem 0.875rem !important;
+  }
+}
+
+/* ============================================
+   SKELETON LOADING UI
+   ============================================ */
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.1) 40px,
+      rgba(255, 255, 255, 0.05) 80px);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-title {
+  height: 1.5rem;
+  width: 60%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-card {
+  height: 200px;
+  border-radius: 16px;
+}
+
+.skeleton-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.skeleton-button {
+  height: 44px;
+  border-radius: 8px;
+}
+
+/* ============================================
+   CARD ASPECT RATIO & MOBILE TEXT SCALING
+   ============================================ */
+
+/* Card aspect ratio 1:1.2 (portrait) */
+.card-aspect {
+  aspect-ratio: 1 / 1.2;
+  width: 100%;
+}
+
+/* Dynamic text scaling based on viewport */
+@media (max-width: 640px) {
+
+  /* Small phones - extra small text */
+  .card-title {
+    font-size: clamp(0.875rem, 3vw, 1.125rem) !important;
+  }
+
+  .card-description {
+    font-size: clamp(0.75rem, 2.5vw, 0.875rem) !important;
+  }
+
+  .card-badge {
+    font-size: clamp(0.625rem, 2vw, 0.75rem) !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+}
+
+@media (max-width: 374px) {
+
+  /* Extra small phones - tiny text */
+  .card-title {
+    font-size: clamp(0.75rem, 3vw, 1rem) !important;
+  }
+
+  .card-description {
+    font-size: clamp(0.6875rem, 2.5vw, 0.8125rem) !important;
+  }
+
+  .card-badge {
+    font-size: clamp(0.5625rem, 2vw, 0.6875rem) !important;
+  }
+}
+
+/* Responsive grid - single column on mobile */
+.ai-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .ai-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .ai-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ai-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile card text scaling - VERY IMPORTANT */
+@media (max-width: 640px) {
+  .ai-card-title {
+    font-size: 14px !important;
+  }
+
+  .ai-card-description {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  .ai-card-badge {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+
+  .ai-card-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .ai-card-icon svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+@media (max-width: 374px) {
+  .ai-card-title {
+    font-size: 13px !important;
+  }
+
+  .ai-card-description {
+    font-size: 10px !important;
+  }
+
+  .ai-card-badge {
+    font-size: 9px !important;
+  }
+}
+
+/* ============================================
+   PREMIUM AI CARD ANIMATIONS
+   ============================================ */
+
+/* Sliding text animation for AI names */
+@keyframes slide-text {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.slide-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: slide-text 8s linear infinite;
+}
+
+.slide-text-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slide-text-wrapper {
+  display: flex;
+}
+
+/* Tag animation - appear one by one */
+@keyframes tag-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.tag-animate {
+  animation: tag-appear 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+/* Premium button gradient (sidebar style) */
+.premium-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: all 0.3s ease;
+}
+
+.premium-button:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.premium-button:active {
+  transform: translateY(0);
+}
+
+/* Compact card for mobile */
+@media (max-width: 640px) {
+  .compact-card {
+    padding: 16px !important;
+    min-height: auto !important;
+  }
+
+  .compact-card-title {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .compact-card-tags {
+    padding: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .compact-card-button {
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Mobile container - reduce left/right padding */
+@media (max-width: 640px) {
+  .mobile-container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .mobile-grid-compact {
+    gap: 8px !important;
+  }
+
+  /* Small AI icons on mobile */
+  .ai-icon-mobile {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .ai-icon-mobile svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+/* Mobile Plans Card Optimization */
+@media (max-width: 640px) {
+
+  /* Increase padding and gap for plans cards on mobile */
+  .plans-grid-mobile {
+    gap: 48px !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+
+  /* Smaller plan card icons */
+  .plan-icon-mobile {
+    width: 48px !important;
+    height: 48px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .plan-icon-mobile svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /* Smaller text in plan cards */
+  .plan-title-mobile {
+    font-size: 18px !important;
+  }
+
+  .plan-price-mobile {
+    font-size: 28px !important;
+  }
+
+  .plan-feature-mobile {
+    font-size: 13px !important;
+  }
+
+  .plan-button-mobile {
+    font-size: 14px !important;
+    padding: 12px 20px !important;
+  }
+
+  /* Compact plan card padding */
+  .plan-card-mobile {
+    padding: 20px !important;
+  }
+}
+
+/* Mobile Plans Card - Extra Small Optimization */
+@media (max-width: 640px) {
+
+  /* Much smaller plan card icons */
+  .plan-icon-mobile {
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .plan-icon-mobile svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Smaller plan title */
+  .plan-title-mobile {
+    font-size: 16px !important;
+  }
+
+  /* Smaller plan price */
+  .plan-price-mobile {
+    font-size: 22px !important;
+  }
+
+  /* Much smaller feature text and checkmark */
+  .plan-feature-mobile {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  .plan-feature-mobile svg {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+  }
+
+  /* Smaller button */
+  .plan-button-mobile {
+    font-size: 13px !important;
+    padding: 10px 16px !important;
+  }
+
+  /* Compact plan card */
+  .plan-card-mobile {
+    padding: 16px !important;
+  }
+
+  /* About section cards - BIGGER size on mobile */
+  .about-cards-grid {
+    gap: 16px !important;
+  }
+
+  .about-cards-grid>div {
+    padding: 24px !important;
+  }
+
+  .about-cards-grid .rounded-2xl {
+    width: 64px !important;
+    height: 64px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .about-cards-grid .rounded-2xl svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding-left: 48px !important;
+}
+
+/* Removed empty rulesets */
+
+/* Mobile specific - even MORE padding */
+@media (max-width: 640px) {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding-left: 60px !important;
+  }
+}
+
+/* Fix input icon overlap - Balanced padding */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding-left: 50px !important;
+}
+
+/* Mobile specific - slightly more padding */
+@media (max-width: 640px) {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding-left: 54px !important;
+  }
+}
+
+/* ============================================
+   NATIVE MOBILE SIDEBAR ANIMATIONS
+   ============================================ */
+
+/* Smooth sidebar slide animation */
+.sidebar-slide {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Backdrop overlay */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  transition: opacity 300ms ease-in-out;
+}
+
+.sidebar-backdrop-enter {
+  opacity: 0;
+}
+
+.sidebar-backdrop-enter-active {
+  opacity: 1;
+}
+
+.sidebar-backdrop-exit {
+  opacity: 1;
+}
+
+.sidebar-backdrop-exit-active {
+  opacity: 0;
+}
+
+/* Mobile sidebar optimizations */
+@media (max-width: 1024px) {
+  .mobile-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 70vw;
+    max-width: 320px;
+    z-index: 50;
+    transform: translateX(-100%);
+  }
+
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Touch-friendly tap targets */
+  .mobile-sidebar button,
+  .mobile-sidebar a {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Swipe gesture indicator */
+.swipe-indicator {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 80px;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.5), transparent);
+  border-radius: 0 4px 4px 0;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.swipe-indicator.visible {
+  opacity: 1;
+}
+
+/* ============================================
+   NEW AI CARD DESIGN - MOBILE OPTIMIZED
+   ============================================ */
+
+/* Modern AI Card */
+.ai-card-new {
+  position: relative;
+  border-radius: 24px;
+  /* rounded-3xl */
+  padding: 20px;
+  background: var(--background-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+
+.ai-card-new:hover::before {
+  opacity: 1;
+}
+
+.ai-card-new:hover {
+  transform: translateY(-4px);
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+}
+
+/* Icon badge - DO NOT SET ANY BACKGROUND - let inline style apply gradient */
+.ai-card-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  /* Explicitly allow inline styles to set background */
+}
+
+/* Light mode: Ensure gradient backgrounds are NOT overridden */
+.light .ai-card-icon-badge[style*="background"],
+.light .ai-card-icon-badge[style*="linear-gradient"],
+[data-theme="light"] .ai-card-icon-badge[style*="background"],
+[data-theme="light"] .ai-card-icon-badge[style*="linear-gradient"] {
+  /* Force inline gradient backgrounds to be visible in light mode */
+  opacity: 1 !important;
+}
+
+/* AI card icons must ALWAYS be white on gradient background */
+.ai-card-icon-badge svg,
+.ai-card-icon-badge .lucide {
+  color: white !important;
+  stroke: white !important;
+}
+
+.ai-card-icon-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.2;
+  filter: blur(12px);
+}
+
+/* Card content */
+.ai-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 6px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-card-desc {
+  font-size: 13px;
+  color: var(--foreground-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ai-card-badge-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+/* Mobile specific */
+@media (max-width: 640px) {
+  .ai-card-new {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .ai-card-icon-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 24px;
+    margin-bottom: 10px;
+  }
+
+  .ai-card-icon-badge svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .ai-card-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .ai-card-desc {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .ai-card-badge-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}
+
+/* Remove hover gradient bar */
+.ai-card-new::before {
+  display: none;
+}
+
+/* Action button styles */
+.ai-card-action-btn {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--foreground);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ai-card-action-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 640px) {
+  .ai-card-action-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
+
+/* Mobile sidebar button text optimization */
+@media (max-width: 1024px) {
+
+  /* Sidebar navigation buttons */
+  .sidebar-nav-btn {
+    font-size: 14px !important;
+  }
+
+  .sidebar-nav-btn span {
+    font-size: 14px !important;
+  }
+
+  /* Stats card text */
+  .sidebar-stats-text {
+    font-size: 13px !important;
+  }
+}
+
+/* ============================================
+   SEARCH PAGE MODE SELECTOR - MOBILE
+   ============================================ */
+
+/* Mobile optimization for search mode selector */
+@media (max-width: 640px) {
+  .search-mode-btn {
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+  }
+
+  .search-mode-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* ============================================
+   BOOK-STYLE CHAT MESSAGES
+   ============================================ */
+
+/* Message content formatting - book style */
+.message-content-book h1,
+.message-content-book h2,
+.message-content-book h3,
+.message-content-book h4 {
+  margin-top: 28px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--foreground);
+}
+
+.message-content-book h1 {
+  font-size: 24px;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+  padding-bottom: 12px;
+}
+
+.message-content-book h2 {
+  font-size: 21px;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  padding-bottom: 10px;
+}
+
+.message-content-book h3 {
+  font-size: 19px;
+}
+
+.message-content-book h4 {
+  font-size: 17px;
+}
+
+.message-content-book p {
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.message-content-book ul,
+.message-content-book ol {
+  margin: 20px 0;
+  padding-left: 28px;
+}
+
+.message-content-book li {
+  margin-bottom: 12px;
+  line-height: 1.8;
+}
+
+.message-content-book li::marker {
+  color: rgba(139, 92, 246, 0.7);
+}
+
+.message-content-book code {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  color: #a855f7;
+}
+
+.message-content-book pre {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 20px 0;
+  border-left: 4px solid rgba(139, 92, 246, 0.5);
+}
+
+.message-content-book pre code {
+  background: none;
+  padding: 0;
+  color: var(--foreground);
+  font-size: 14px;
+}
+
+.message-content-book blockquote {
+  border-left: 4px solid rgba(139, 92, 246, 0.5);
+  padding-left: 20px;
+  margin: 20px 0;
+  font-style: italic;
+  color: var(--foreground-secondary);
+}
+
+.message-content-book strong {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.message-content-book em {
+  font-style: italic;
+  color: var(--foreground-secondary);
+}
+
+.message-content-book a {
+  color: #8b5cf6;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.message-content-book a:hover {
+  color: #a855f7;
+}
+
+/* First paragraph larger */
+.message-content-book>p:first-child {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+/* Spacing between sections */
+.message-content-book>*:first-child {
+  margin-top: 0 !important;
+}
+
+.message-content-book>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+
+/* ============================================
+   LIGHT MODE - AUTH PAGES & GENERAL (NOT DASHBOARD)
+   Dashboard uses its own dedicated CSS files
+   ============================================ */
+
+/* Auth Pages (Login/Signup): Input field icons BLACK */
+.light main form svg,
+.light main form .lucide {
+  color: #0F172A !important;
+}
+
+.light main input+svg,
+.light main .relative svg {
+  color: #0F172A !important;
+}
+
+/* Light mode text colors - General */
+.light h1,
+.light h2,
+.light h3,
+.light h4,
+.light h5,
+.light h6,
+.light p,
+.light span,
+.light div,
+.light label {
+  color: var(--foreground);
+}
+
+/* Light mode gradient text should remain visible */
+.light .gradient-text {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Light mode input fields - General */
+.light input,
+.light textarea,
+.light select {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  color: var(--foreground) !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: var(--foreground-secondary) !important;
+}
+
+/* Light mode scrollbar */
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.light ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+
+
+
+/* ============================================
+   GLOBAL GRADIENT BUTTON TEXT COLOR FIX
+   ============================================ */
+
+/* All buttons with gradient hero background should have white text */
+button[style*="gradient-hero"],
+button[style*="linear-gradient"],
+.gradient-hero,
+[style*="var(--gradient-hero)"] {
+  color: white !important;
+}
+
+button[style*="gradient-hero"] span,
+button[style*="linear-gradient"] span,
+button[style*="gradient-hero"] svg,
+button[style*="linear-gradient"] svg,
+.gradient-hero span,
+.gradient-hero svg,
+[style*="var(--gradient-hero)"] span,
+[style*="var(--gradient-hero)"] svg {
+  color: white !important;
+}
+
+/* Ensure gradient buttons in light mode also have white text */
+.light button[style*="gradient"],
+.light a[style*="gradient"],
+.light button[style*="linear-gradient"],
+.light a[style*="linear-gradient"],
+.light button[class*="gradient"],
+.light a[class*="gradient"] {
+  color: white !important;
+}
+
+.light button[style*="gradient"] span,
+.light button[style*="gradient"] svg,
+.light a[style*="gradient"] span,
+.light a[style*="gradient"] svg,
+.light button[style*="linear-gradient"] span,
+.light button[style*="linear-gradient"] svg,
+.light a[style*="linear-gradient"] span,
+.light a[style*="linear-gradient"] svg,
+.light button[class*="gradient"] span,
+.light button[class*="gradient"] svg,
+.light a[class*="gradient"] span,
+.light a[class*="gradient"] svg {
+  color: white !important;
+}
+
+/* Extra specific rule for sidebar active buttons in light mode */
+.light aside button[style*="gradient"] *,
+.light main button[style*="gradient"] * {
+  color: white !important;
+}
+
+/* Auth pages - Back to Home button */
+.auth-back-button {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-back-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Light mode auth pages - Back to Home button */
+.light .auth-back-button {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.light .auth-back-button:hover {
+  background: #F5F5F5 !important;
+}
+
+/* ============================================
+   AUTH PAGES - INPUT FIELD ICONS FIX
+   ============================================ */
+
+/* Force auth page input icons to be BLACK in light mode */
+.light main form svg,
+.light main form .lucide,
+.light main form [class*="lucide"] {
+  color: #0F172A !important;
+  stroke: currentColor !important;
+}
+
+/* Ensure auth page input icons are visible in light mode */
+.light main input+button svg,
+.light main .relative svg {
+  color: #0F172A !important;
+  stroke: currentColor !important;
+}
+
+/* ============================================
+   NUCLEAR: AUTH-ICON CLASS - ABSOLUTE PRIORITY
+   ============================================ */
+
+/* Force all auth-icon elements to be BLACK in light mode */
+.light .auth-icon,
+.light svg.auth-icon,
+.light main .auth-icon,
+.light main form .auth-icon,
+.light main form svg.auth-icon,
+.light main .relative .auth-icon,
+.light main input+button .auth-icon {
+  color: #0F172A !important;
+  stroke: #0F172A !important;
+  fill: none !important;
+}
+
+/* Extra nuclear specificity */
+[data-theme="light"] .auth-icon,
+[data-theme="light"] svg.auth-icon {
+  color: #0F172A !important;
+  stroke: #0F172A !important;
+  fill: none !important;
 }
