@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-export default function TypingIndicator({ userName }: { userName?: string }) {
+export default function TypingIndicator({ userName, avatarUrl }: { userName?: string; avatarUrl?: string }) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -15,8 +15,22 @@ export default function TypingIndicator({ userName }: { userName?: string }) {
                 className="leaders-message-avatar"
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: 'spring', stiffness: 400 }}
+                style={{ overflow: 'hidden' }}
             >
-                {userName?.charAt(0).toUpperCase() || 'U'}
+                {avatarUrl ? (
+                    <img
+                        src={avatarUrl}
+                        alt={userName || 'User'}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '50%'
+                        }}
+                    />
+                ) : (
+                    <>{userName?.charAt(0).toUpperCase() || 'U'}</>
+                )}
             </motion.div>
 
             <div className="leaders-message-content">

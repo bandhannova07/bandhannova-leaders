@@ -31,8 +31,22 @@ export default function UserList({ users, currentUserId }: UserListProps) {
                         className="leaders-user-avatar"
                         whileHover={{ scale: 1.1 }}
                         transition={{ type: 'spring', stiffness: 400 }}
+                        style={{ overflow: 'hidden' }}
                     >
-                        {user.full_name.charAt(0).toUpperCase()}
+                        {user.avatar_url ? (
+                            <img
+                                src={user.avatar_url}
+                                alt={user.full_name}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    borderRadius: '50%'
+                                }}
+                            />
+                        ) : (
+                            <>{user.full_name.charAt(0).toUpperCase()}</>
+                        )}
                     </motion.div>
                     <div className="leaders-user-info">
                         <div className="leaders-user-name">

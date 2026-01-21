@@ -160,8 +160,22 @@ export default function ChatMessage({ message, isOwn, onMediaClick, onReact, onR
                             className="leaders-message-avatar"
                             whileHover={{ scale: 1.1 }}
                             transition={{ type: 'spring', stiffness: 400 }}
+                            style={{ overflow: 'hidden' }}
                         >
-                            {message.user?.full_name?.charAt(0).toUpperCase() || 'U'}
+                            {message.user?.avatar_url ? (
+                                <img
+                                    src={message.user.avatar_url}
+                                    alt={message.user?.full_name || 'User'}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        borderRadius: '50%'
+                                    }}
+                                />
+                            ) : (
+                                <>{message.user?.full_name?.charAt(0).toUpperCase() || 'U'}</>
+                            )}
                         </motion.div>
                     )}
 
@@ -364,8 +378,22 @@ export default function ChatMessage({ message, isOwn, onMediaClick, onReact, onR
                             className="leaders-message-avatar"
                             whileHover={{ scale: 1.1 }}
                             transition={{ type: 'spring', stiffness: 400 }}
+                            style={{ overflow: 'hidden' }}
                         >
-                            {message.user?.full_name?.charAt(0).toUpperCase() || 'Y'}
+                            {message.user?.avatar_url ? (
+                                <img
+                                    src={message.user.avatar_url}
+                                    alt={message.user?.full_name || 'You'}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        borderRadius: '50%'
+                                    }}
+                                />
+                            ) : (
+                                <>{message.user?.full_name?.charAt(0).toUpperCase() || 'Y'}</>
+                            )}
                         </motion.div>
                     )}
                 </motion.div>

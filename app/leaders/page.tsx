@@ -36,7 +36,7 @@ export default function LeadersPage() {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const [isAtBottom, setIsAtBottom] = useState(true);
-    const [typingUsers, setTypingUsers] = useState<Array<{ user_id: string; user_name: string }>>([])
+    const [typingUsers, setTypingUsers] = useState<Array<{ user_id: string; user_name: string; avatar_url?: string }>>([])
 
     // Track desktop/mobile state and set initial sidebar state
     useEffect(() => {
@@ -134,10 +134,10 @@ export default function LeadersPage() {
                 // Don't show current user's typing status
                 if (typingStatus.user_id === currentUser.id) return;
 
-                // Get user info
+                // Get user info with avatar
                 const { data: userData } = await leadersSupabase
                     .from('leaders_users')
-                    .select('full_name')
+                    .select('full_name, avatar_url')
                     .eq('id', typingStatus.user_id)
                     .single();
 
@@ -145,7 +145,11 @@ export default function LeadersPage() {
                     setTypingUsers(prev => {
                         const exists = prev.find(u => u.user_id === typingStatus.user_id);
                         if (exists) return prev;
-                        return [...prev, { user_id: typingStatus.user_id, user_name: userData?.full_name || 'Someone' }];
+                        return [...prev, {
+                            user_id: typingStatus.user_id,
+                            user_name: userData?.full_name || 'Someone',
+                            avatar_url: userData?.avatar_url
+                        }];
                     });
                 } else {
                     setTypingUsers(prev => prev.filter(u => u.user_id !== typingStatus.user_id));
@@ -534,7 +538,11 @@ export default function LeadersPage() {
                     {/* Typing Indicators */}
                     <AnimatePresence>
                         {typingUsers.map((typingUser) => (
-                            <TypingIndicator key={typingUser.user_id} userName={typingUser.user_name} />
+                            <TypingIndicator
+                                key={typingUser.user_id}
+                                userName={typingUser.user_name}
+                                avatarUrl={typingUser.avatar_url}
+                            />
                         ))}
                     </AnimatePresence>
 
