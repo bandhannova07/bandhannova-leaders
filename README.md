@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BandhanNova Leaders
+
+A Next.js-based real-time chat application for leaders with authentication, profile management, and messaging features.
+
+## Features
+
+- Real-time messaging with Supabase
+- User authentication and profile management
+- Settings page with profile customization
+- Dark/Light theme support
+- Responsive design for mobile and desktop
 
 ## Getting Started
 
